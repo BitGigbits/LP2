@@ -6,7 +6,7 @@
 Meu nome é Pedro Lucas Lessa Martins, tenho 19 anos e estou cursando Ciência da Computação na UERJ.
 Vascaíno de coração!
 
-> **Apelido:** meu nome no GitHub está como "BitGigbits" pois é como eu me identifico na internet, simplesmente é um apelido em que fiquei acostumado e que bastante gente me chama. Normalmente, me chamam apenas por "Bit". A criação desse nickname se dá por um personagem fictício de mesmo nome, que é criado originalmente por mim quando eu estava no ensino fundamental ainda e por ser algo que me marca muito, eu decidi me chamar por esse apelido e acabou pegando.
+> **Apelido:** meu nome no GitHub está como "BitGigbits" pois é como eu me identifico na internet, simplesmente é um apelido em que fiquei acostumado e que bastante gente me chama. Normalmente, me chamam apenas por "Bit". A criação desse nickname se dá por um personagem fictício de mesmo nome, que foi criado originalmente por mim quando eu estava no ensino fundamental ainda e por ser algo que me marca muito, eu decidi me chamar por esse apelido e acabou pegando.
 
 Meus hobbies são resumidamente jogos de computador e animes. É claro, existem nichos dentre os mesmos em que prefiro não comentar já que levarei tempo falando.
 
