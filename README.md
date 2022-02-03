@@ -12,4 +12,8 @@ Meus hobbies são resumidamente jogos de computador e animes. É claro, existem 
 
 # Habilidades
 ## Línguas
-> Além do português, sou bom o suficiente em inglês para entender falas, ler e escrever. Somente falar que travo um pouco. Atualmente tenho estudado Japonês, o motivo são obviamente os Animes.
+> Além do português, sou bom o suficiente em inglês para entender falas, ler e escrever. Somente falar que travo um pouco. Atualmente tenho estudado Japonês, o motivo é obviamente Animes.
+## Linguagens de Programação
+> Estudei Python 2.7, mas estou me planejando para mover para o 3.0. Além de Python sei programar em C e agora estou estudando Java.
+## jogos
+> Possuo uma extrema habilidade em jogos rítmicos (como Guitar Hero e StepMania), no entanto por causa de vício adquiri tendinites então pelo momento não os jogo mais.
