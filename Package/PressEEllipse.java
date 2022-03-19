@@ -4,6 +4,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
 
+//Exercício 2.5.1 para pressionar a tecla 'e' e aparecer uma elipse.
+
 public class PressEEllipse {
     public static void main(String[] args){
         Frames frame = new Frames();
