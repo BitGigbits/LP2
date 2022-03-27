@@ -1,0 +1,4 @@
+Por enquanto adicionado as funções de dizer que selecionou uma figura, ou seja, dizer que o mouse onde clicou detectou uma das figuras.
+
+Apertar o botão 'r' para aparecer um retângulo e o botão 'e' para aparecer uma Elipse. As figuras de triângulo e linha foram criadas mas ainda não foi implementado os mesmos por eu não ter conseguido mesmo criá-los e selecioná-los. Estou em processo de cosntrução dos mesmos.
+
