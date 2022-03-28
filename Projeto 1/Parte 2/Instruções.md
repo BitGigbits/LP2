@@ -1,4 +1,4 @@
-#Funcionalidades
+# Funcionalidades
 > Aperte 'e' para criar uma Elipse
 > Aperte 'r' para criar um retângulo
 > Aperte 't' para criar um triângulo
