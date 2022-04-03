@@ -2,23 +2,23 @@ package figures;
 import java.awt.*;
 
 public class Triangle extends Figures {
-    private int v1[];
-    private int v2[];
-    private int p;
+    private int v1[] = new int[3];
+    private int v2[] = new int[3];
 
-    public Triangle(int v1[], int v2[], int p, int rc, int gc, int bc, int ri, int gi, int bi){
-        super(rc, gc, bc, ri, gi, bi);
-        this.v1 = v1;
-        this.v2 = v2;
-        this.p = p;
+    public Triangle(int x, int y, int w, int h, Color colorIntern, Color colorBorder){
+        super(x, y, w , h, colorIntern, colorBorder);
     }
 
     public void paint(Graphics g){
-        g.setColor(new Color(this.ri, this.gi, this.bi));
-        g.fillPolygon(v1, v2, 3);
-        g.setColor(new Color(this.rc, this.gc, this.bc));
+        this.v1[0] = this.x + this.w;
+        this.v1[1] = (2*this.x + this.w)/2;
+        this.v1[2] = this.x;
+        this.v2[0] = this.y + this.h;
+        this.v2[1] = this.y;
+        this.v2[2] = this.y + this.h;
+        g.setColor(this.colorIntern);
+        g.fillPolygon(this.v1, this.v2, 3);
+        g.setColor(this.colorBorder);
         g.drawPolygon(this.v1, this.v2, 3);
     }
-
-
 }

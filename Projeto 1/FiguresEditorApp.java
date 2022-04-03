@@ -1,6 +1,6 @@
 import figures.*;
+
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
@@ -12,20 +12,19 @@ public class FiguresEditorApp {
         frame.setVisible(true);
         frame.setTitle("Figuras");
         frame.setSize(500,500);
-        BufferedImage bi = new BufferedImage(500, 500, BufferedImage.TYPE_INT_RGB);
     }
 }
 
 class Frames extends JFrame{
     private ArrayList<Figures> figs = new ArrayList<Figures>();
-    private Random rand = new Random();
+    private Point poinAux1 = new Point();
+    private Point poinAux2 = new Point();
     private Figures focus = null;
-    private Point mouse1 = new Point(0,0);
-
-    boolean movimento;
-    boolean dentro;
+    private boolean movimento = false;
+    private boolean resizing = false;
 
     Frames(){
+
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing (WindowEvent e){
                 System.exit(0);
@@ -33,61 +32,76 @@ class Frames extends JFrame{
         });
 
         this.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
             public void mousePressed(MouseEvent evt){
                 focus = null;
-                Figures aux;
+                poinAux1 = getMousePosition();
                 int X = evt.getX();
                 int Y = evt.getY();
                 for (Figures fig: figs){
-                    if (X >= fig.x && X <= fig.x+50 && Y >= fig.y && Y <= fig.y+50){
+                    if (X >= fig.x && X <= fig.x+fig.w && Y >= fig.y && Y <= fig.y+fig.h){
                         focus = fig;
                         movimento = true;
                     }
                 }
+                if (focus != null){
+                    Figures aux = focus;
+                    figs.remove(focus);
+                    figs.add(aux);
+                    focus = aux;
+                    repaint();
+                }
+                repaint();
             }
 
             public void mouseReleased(MouseEvent evt){
                 movimento = false;
-            }
-
-            public void mouseExited(MouseEvent e) {
-                super.mouseExited(e);
-                dentro = false;
-            }
-
-            public void mouseEntered(MouseEvent evt) {
-                super.mouseEntered(evt);
-                int X = evt.getX();
-                int Y = evt.getY();
-                for (Figures fig : figs) {
-                    if (X >= fig.x && X <= fig.x + 50 && Y >= fig.y && Y <= fig.y + 50) {
-                        dentro = true;
-                    }
-                }
             }
         });
 
         this.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent evt) {
                 Point mousept = getMousePosition();
-                if (movimento){
-                    focus.x = mousept.x-25 ;
-                    focus.y = mousept.y-25;
-                }
-                repaint();
-            }
-        });
-
-        this.addMouseWheelListener(new MouseAdapter() {
-            public void mouseWheelMoved(MouseWheelEvent evt) {
-                super.mouseWheelMoved(evt);
                 if (focus != null){
-                    if (evt.getWheelRotation() < 0){
-                        focus.x = focus.w +2;
-                        focus.y = focus.h +2;
+                    if (movimento == true && resizing == false){
+                        focus.x = mousept.x - focus.w/2;
+                        focus.y = mousept.y - focus.h/2;
                     }else{
-                        focus.w = focus.w -2;
-                        focus.h = focus.h -2;
+                        if (resizing){
+                            if (mousept.x > focus.x+focus.w-10) {
+                                if (poinAux1.x < mousept.x) {
+                                    focus.w += 1;
+                                }else {
+                                    focus.w -= 1;
+                                }
+                            }else if(mousept.x < focus.x+10){
+                                if (poinAux1.x > mousept.x){
+                                    focus.w += 1;
+                                    focus.x = mousept.x;
+                                }else{
+                                    focus.w -= 1;
+                                    focus.x = mousept.x;
+                                }
+                            }
+                            if (mousept.y > focus.y+focus.h-10){
+                                if (poinAux1.y < mousept.y){
+                                    focus.h += 1;
+                                }else{
+                                    focus.h -= 1;
+                                }
+                            }else if(mousept.y < focus.y+10){
+                                if (poinAux1.y > mousept.y){
+                                    focus.h += 1;
+                                    focus.y = mousept.y;
+                                }else{
+                                    focus.h -= 1;
+                                    focus.y = mousept.y;
+                                }
+                            }
+                        }
                     }
                     repaint();
                 }
@@ -100,20 +114,74 @@ class Frames extends JFrame{
                         Point ponto = getMousePosition();
                         switch(evt.getKeyChar()){
                             case 'r':
-                                figs.add(new Rect(ponto.x, ponto.y, 50, 50, 0, 0, 0,255, 255, 255 ));
+                                figs.add(new Rect(ponto.x, ponto.y, 50, 50, Color.white, Color.BLACK));
                                 break;
                             case 'e':
-                                figs.add(new Ellipse(ponto.x, ponto.y, 50, 50, 0, 0, 0,255, 255, 255 ));
+                                figs.add(new Ellipse(ponto.x, ponto.y, 50, 50, Color.white, Color.BLACK));
                                 break;
                             case 't':
-                                figs.add(new Triangle(new int[] {ponto.x, ponto.x+25, ponto.x+50}, new int[] {ponto.y+50, ponto.y-50, ponto.y+50}, 3, 0,0,0, 255, 255, 255));
+                                figs.add(new Triangle(ponto.x, ponto.y, 50, 50, Color.white, Color.black));
+                                break;
+                            case 'l':
+                                figs.add(new Line(ponto.x, ponto.y, 50, 50, Color.black));
                                 break;
                             case KeyEvent.VK_DELETE:
                                 figs.remove(focus);
-                            case KeyEvent.VK_TAB:
+                                focus = null;
+                                break;
+                            case 'i':
+                                if (focus != null){
+                                    JColorChooser colorChooser = new JColorChooser();
+                                    Color color = JColorChooser.showDialog(null, "Escolha a cor", Color.black);
+                                    focus.colorIntern = color;
+                                    break;
+                                }
+                            case 'b':
+                                if (focus != null){
+                                    JColorChooser colorChooser = new JColorChooser();
+                                    Color color = JColorChooser.showDialog(null, "Escolha a cor", Color.black);
+                                    focus.colorBorder = color;
+                                    break;
+                                }
+                            case 'p':
+                                resizing = true;
+                                movimento = false;
+                                break;
+                            case 'o':
+                                resizing = false;
                                 break;
                             default:
                                 break;
+                        }
+
+                        switch(evt.getKeyCode()){
+                            case KeyEvent.VK_UP:
+                                if (focus != null){
+                                    focus.y -= 4;
+                                }
+                                break;
+                            case KeyEvent.VK_DOWN:
+                                if (focus != null){
+                                    focus.y += 4;
+                                }
+                                break;
+                            case KeyEvent.VK_LEFT:
+                                if (focus != null){
+                                    focus.x -= 4;
+                                }
+                                break;
+                            case KeyEvent.VK_RIGHT:
+                                if (focus != null) {
+                                    focus.x += 4;
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                        if (focus != null){
+                            for (int i = 0; i < figs.size(); i++){
+                                focus = figs.get(i);
+                            }
                         }
                         repaint();
                     }
@@ -126,6 +194,11 @@ class Frames extends JFrame{
         for (Figures f: figs){
             f.paint(g);
         }
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(Color.orange);
+        if (focus != null){
+            g2d.setStroke(new BasicStroke(4));
+            g2d.drawRect(focus.x - 3, focus.y - 3, focus.w + 6, focus.h + 6);
+        }
     }
-
 }

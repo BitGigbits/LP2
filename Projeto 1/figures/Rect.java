@@ -3,14 +3,21 @@ import java.awt.*;
 
 public class Rect extends Figures{
 
-    public Rect (int x, int y, int w, int h, int rc, int gc, int bc, int ri, int gi, int bi){
-        super(x, y, w, h, rc, gc, bc, ri, gi, bi);
+    public Rect (int x, int y, int w, int h, Color colorIntern, Color colorBorder){
+        super(x, y, w, h, colorIntern, colorBorder);
     }
 
-    public void paint (Graphics g){
-        g.setColor(new Color(this.ri, this.gi, this.bi));
+    @Override
+    public void paint(Graphics g){
+        if (colorIntern == null){
+            colorIntern = Color.white;
+        }
+        if (colorBorder == null){
+            colorBorder = Color.black;
+        }
+        g.setColor(this.colorIntern);
         g.fillRect(this.x, this.y, this.w, this.h);
-        g.setColor(new Color(this.rc, this.gc, this.bc));
+        g.setColor(this.colorBorder);
         g.drawRect(this.x, this.y, this.w, this.h);
     }
 
