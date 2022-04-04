@@ -12,16 +12,19 @@ public class FiguresEditorApp {
         frame.setVisible(true);
         frame.setTitle("Figuras");
         frame.setSize(500,500);
+        frame.setFocusTraversalKeysEnabled(false);
     }
 }
 
 class Frames extends JFrame{
     private ArrayList<Figures> figs = new ArrayList<Figures>();
+    private int control = 0;
+    private int aux;
     private Point poinAux1 = new Point();
-    private Point poinAux2 = new Point();
     private Figures focus = null;
     private boolean movimento = false;
     private boolean resizing = false;
+    private boolean sinal = false;
 
     Frames(){
 
@@ -115,15 +118,19 @@ class Frames extends JFrame{
                         switch(evt.getKeyChar()){
                             case 'r':
                                 figs.add(new Rect(ponto.x, ponto.y, 50, 50, Color.white, Color.BLACK));
+                                control++;
                                 break;
                             case 'e':
                                 figs.add(new Ellipse(ponto.x, ponto.y, 50, 50, Color.white, Color.BLACK));
+                                control++;
                                 break;
                             case 't':
                                 figs.add(new Triangle(ponto.x, ponto.y, 50, 50, Color.white, Color.black));
+                                control++;
                                 break;
                             case 'l':
                                 figs.add(new Line(ponto.x, ponto.y, 50, 50, Color.black));
+                                control++;
                                 break;
                             case KeyEvent.VK_DELETE:
                                 figs.remove(focus);
@@ -133,14 +140,22 @@ class Frames extends JFrame{
                                 if (focus != null){
                                     JColorChooser colorChooser = new JColorChooser();
                                     Color color = JColorChooser.showDialog(null, "Escolha a cor", Color.black);
-                                    focus.colorIntern = color;
+                                    if (color == null){
+                                        break;
+                                    }else{
+                                        focus.colorIntern = color;
+                                    }
                                     break;
                                 }
                             case 'b':
                                 if (focus != null){
                                     JColorChooser colorChooser = new JColorChooser();
                                     Color color = JColorChooser.showDialog(null, "Escolha a cor", Color.black);
-                                    focus.colorBorder = color;
+                                    if (color == null){
+                                        break;
+                                    }else{
+                                        focus.colorBorder = color;
+                                    }
                                     break;
                                 }
                             case 'p':
