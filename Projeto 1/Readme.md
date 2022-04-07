@@ -9,3 +9,5 @@ Você pode redimensionar as mesmas figuras apertando a tecla 'p' para entrar no 
 Para adicionar cores as figuras, clique em alguma delas e aperte a tecla 'c' para mudar a cor de contorno ou a tecla 'i' para mudar a cor de preenchimento das figuras.
 
 Você pode apertar delete com a figura em foco para remover uma figura.  Você consegue saber quando uma figura está em foco quando um retângulo laranja está ao redor da figura.
+
+Você consegue trocar o foco das figuras com a tecla TAB.
