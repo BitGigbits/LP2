@@ -9,12 +9,6 @@ public class Rect extends Figures{
 
     @Override
     public void paint(Graphics g){
-        if (colorIntern == null){
-            colorIntern = Color.white;
-        }
-        if (colorBorder == null){
-            colorBorder = Color.black;
-        }
         g.setColor(this.colorIntern);
         g.fillRect(this.x, this.y, this.w, this.h);
         g.setColor(this.colorBorder);

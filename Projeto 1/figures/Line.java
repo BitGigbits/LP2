@@ -5,8 +5,8 @@ public class Line extends Figures{
     private int v1[] = new int[2];
     private int v2[] = new int[2];
 
-    public Line(int x, int y, int w, int h, Color colorIntern){
-        super(x, y, w, h, colorIntern);
+    public Line(int x, int y, int w, int h, Color colorBorder){
+        super(x, y, w, h, colorBorder);
     }
 
     public void paint(Graphics g){
@@ -14,7 +14,7 @@ public class Line extends Figures{
         v1[1] = this.x;
         v2[0] = this.y;
         v2[1] = this.y + this.h;
-        g.setColor(this.colorIntern);
+        g.setColor(this.colorBorder);
         g.drawPolygon(this.v1, this.v2, 2);
     }
 }

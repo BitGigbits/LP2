@@ -10,21 +10,18 @@ public class FiguresEditorApp {
     public static void main(String[] args){
         Frames frame = new Frames();
         frame.setVisible(true);
-        frame.setTitle("Figuras");
+        frame.setTitle("Figures");
         frame.setSize(500,500);
         frame.setFocusTraversalKeysEnabled(false);
     }
 }
 
 class Frames extends JFrame{
-    private ArrayList<Figures> figs = new ArrayList<Figures>();
-    private int control = 0;
-    private int aux;
-    private Point poinAux1 = new Point();
+    private final ArrayList<Figures> figs = new ArrayList<>();
+    private int dx, dy, mouseY, mouseX;
     private Figures focus = null;
-    private boolean movimento = false;
+    private boolean move = false;
     private boolean resizing = false;
-    private boolean sinal = false;
 
     Frames(){
 
@@ -41,13 +38,14 @@ class Frames extends JFrame{
 
             public void mousePressed(MouseEvent evt){
                 focus = null;
-                poinAux1 = getMousePosition();
-                int X = evt.getX();
-                int Y = evt.getY();
+                mouseX = evt.getX();
+                mouseY = evt.getY();
                 for (Figures fig: figs){
-                    if (X >= fig.x && X <= fig.x+fig.w && Y >= fig.y && Y <= fig.y+fig.h){
+                    if (mouseX >= fig.x && mouseX <= fig.x+fig.w && mouseY >= fig.y && mouseY <= fig.y+fig.h){
                         focus = fig;
-                        movimento = true;
+                        move = true;
+                        dx = mouseX - focus.x;
+                        dy = mouseY - focus.y;
                     }
                 }
                 if (focus != null){
@@ -61,50 +59,54 @@ class Frames extends JFrame{
             }
 
             public void mouseReleased(MouseEvent evt){
-                movimento = false;
+                move = false;
             }
         });
 
         this.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent evt) {
-                Point mousept = getMousePosition();
+                Point mousePoint = getMousePosition();
                 if (focus != null){
-                    if (movimento == true && resizing == false){
-                        focus.x = mousept.x - focus.w/2;
-                        focus.y = mousept.y - focus.h/2;
+                    if (move && !resizing){
+                        focus.x = mousePoint.x - dx;
+                        focus.y = mousePoint.y - dy;
                     }else{
                         if (resizing){
-                            if (mousept.x > focus.x+focus.w-10) {
-                                if (poinAux1.x < mousept.x) {
-                                    focus.w += 1;
+                            if (mousePoint.x > focus.x+focus.w-10) {
+                                if (mouseX < mousePoint.x) {
+                                    focus.w += mousePoint.x - (focus.x + focus.w);
                                 }else {
-                                    focus.w -= 1;
+                                    focus.w -= (focus.x + focus.w) - mousePoint.x;
                                 }
-                            }else if(mousept.x < focus.x+10){
-                                if (poinAux1.x > mousept.x){
-                                    focus.w += 1;
-                                    focus.x = mousept.x;
+                            }else if(mousePoint.x < focus.x+10){
+                                if (mouseX > mousePoint.x){
+                                    focus.w += focus.x - mousePoint.x;
                                 }else{
-                                    focus.w -= 1;
-                                    focus.x = mousept.x;
+                                    focus.w -= mousePoint.x - focus.x;
                                 }
+                                focus.x = mousePoint.x;
                             }
-                            if (mousept.y > focus.y+focus.h-10){
-                                if (poinAux1.y < mousept.y){
-                                    focus.h += 1;
+                            if (mousePoint.y > focus.y+focus.h-10){
+                                if (mouseY < mousePoint.y){
+                                    focus.h +=  mousePoint.y - (focus.y + focus.h);
                                 }else{
-                                    focus.h -= 1;
+                                    focus.h -= (focus.y + focus.h) - mousePoint.y;
                                 }
-                            }else if(mousept.y < focus.y+10){
-                                if (poinAux1.y > mousept.y){
-                                    focus.h += 1;
-                                    focus.y = mousept.y;
+                            }else if(mousePoint.y < focus.y+10){
+                                if (mouseY > mousePoint.y){
+                                    focus.h += focus.y - mousePoint.y;
                                 }else{
-                                    focus.h -= 1;
-                                    focus.y = mousept.y;
+                                    focus.h -= mousePoint.y - focus.y;
                                 }
+                                focus.y = mousePoint.y;
                             }
                         }
+                    }
+                    if (focus.h <= 0){
+                        focus.h = 1;
+                    }
+                    if (focus.w <= 0){
+                        focus.w = 1;
                     }
                     repaint();
                 }
@@ -114,31 +116,35 @@ class Frames extends JFrame{
         this.addKeyListener(
                 new KeyAdapter(){
                     public void keyPressed (KeyEvent evt){
-                        Point ponto = getMousePosition();
+                        Point point = getMousePosition();
                         switch(evt.getKeyChar()){
                             case 'r':
-                                figs.add(new Rect(ponto.x, ponto.y, 50, 50, Color.white, Color.BLACK));
-                                control++;
+                                figs.add(new Rect(point.x-25, point.y-25, 50, 50, Color.white, Color.BLACK));
                                 break;
                             case 'e':
-                                figs.add(new Ellipse(ponto.x, ponto.y, 50, 50, Color.white, Color.BLACK));
-                                control++;
+                                figs.add(new Ellipse(point.x-25, point.y-25, 50, 50, Color.white, Color.BLACK));
                                 break;
                             case 't':
-                                figs.add(new Triangle(ponto.x, ponto.y, 50, 50, Color.white, Color.black));
-                                control++;
+                                figs.add(new Triangle(point.x-25, point.y-25, 50, 50, Color.white, Color.black));
                                 break;
                             case 'l':
-                                figs.add(new Line(ponto.x, ponto.y, 50, 50, Color.black));
-                                control++;
+                                figs.add(new Line(point.x-25, point.y-25, 50, 50, Color.black));
                                 break;
                             case KeyEvent.VK_DELETE:
                                 figs.remove(focus);
                                 focus = null;
                                 break;
+                            case KeyEvent.VK_TAB:
+                                focus = figs.get(0);
+                                if (focus != null){
+                                    Figures aux = focus;
+                                    figs.remove(focus);
+                                    figs.add(aux);
+                                    focus = aux;
+                                }
+                                break;
                             case 'i':
                                 if (focus != null){
-                                    JColorChooser colorChooser = new JColorChooser();
                                     Color color = JColorChooser.showDialog(null, "Escolha a cor", Color.black);
                                     if (color == null){
                                         break;
@@ -149,7 +155,6 @@ class Frames extends JFrame{
                                 }
                             case 'b':
                                 if (focus != null){
-                                    JColorChooser colorChooser = new JColorChooser();
                                     Color color = JColorChooser.showDialog(null, "Escolha a cor", Color.black);
                                     if (color == null){
                                         break;
@@ -160,7 +165,7 @@ class Frames extends JFrame{
                                 }
                             case 'p':
                                 resizing = true;
-                                movimento = false;
+                                move = false;
                                 break;
                             case 'o':
                                 resizing = false;
@@ -193,10 +198,8 @@ class Frames extends JFrame{
                             default:
                                 break;
                         }
-                        if (focus != null){
-                            for (int i = 0; i < figs.size(); i++){
-                                focus = figs.get(i);
-                            }
+                        for (Figures fig : figs) {
+                            focus = fig;
                         }
                         repaint();
                     }
