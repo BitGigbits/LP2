@@ -2,7 +2,7 @@
 Você pode pressionar as seguintes 4 teclas para aparecer figuras:
 'r' para Retângulos, 'e' para Elipses, 't' para triângulos e 'l' para linhas.
 
-Pode arrastar todas elas com o clique do mouse, como também pode 
+Pode arrastar todas elas com o clique do mouse.
 
 Você pode redimensionar as mesmas figuras apertando a tecla 'p' para entrar no modo redimensionamento. Nesse modo você pode clicar nos cantos da figura e mudar o tamanho delas. Para sair desse modo, aperte a tecla 'o'.
 
