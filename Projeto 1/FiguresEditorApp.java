@@ -13,12 +13,13 @@ public class FiguresEditorApp {
         frame.setTitle("Figures");
         frame.setSize(500,500);
         frame.setFocusTraversalKeysEnabled(false);
+        frame.createBufferStrategy(2);
     }
 }
 
 class Frames extends JFrame{
     private final ArrayList<Figures> figs = new ArrayList<>();
-    private int dx, dy, mouseY, mouseX;
+    private int dx, dy, mouseY, mouseX, storeX, storeY, storeH, storeW;
     private Figures focus = null;
     private boolean move = false;
     private boolean resizing = false;
@@ -33,7 +34,12 @@ class Frames extends JFrame{
 
         this.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-
+                if (focus != null){
+                    storeX = focus.x;
+                    storeY = focus.y;
+                    storeH = focus.h;
+                    storeW = focus.w;
+                }
             }
 
             public void mousePressed(MouseEvent evt){
@@ -43,7 +49,15 @@ class Frames extends JFrame{
                 for (Figures fig: figs){
                     if (mouseX >= fig.x && mouseX <= fig.x+fig.w && mouseY >= fig.y && mouseY <= fig.y+fig.h){
                         focus = fig;
-                        move = true;
+                        if (resizing){
+                            move = false;
+                            storeX = fig.x;
+                            storeY = fig.y;
+                            storeH = fig.h;
+                            storeW = fig.w;
+                        }else{
+                            move = true;
+                        }
                         dx = mouseX - focus.x;
                         dy = mouseY - focus.y;
                     }
@@ -71,42 +85,46 @@ class Frames extends JFrame{
                         focus.x = mousePoint.x - dx;
                         focus.y = mousePoint.y - dy;
                     }else{
-                        if (resizing){
-                            if (mousePoint.x > focus.x+focus.w-10) {
+                        if (resizing && mousePoint != null){
+                            if (mouseX > storeX + storeW - 10 && mouseX < storeX + storeW) {
                                 if (mouseX < mousePoint.x) {
                                     focus.w += mousePoint.x - (focus.x + focus.w);
                                 }else {
                                     focus.w -= (focus.x + focus.w) - mousePoint.x;
                                 }
-                            }else if(mousePoint.x < focus.x+10){
+                            }else if(mouseX < storeX+10 && mouseX > storeX){
                                 if (mouseX > mousePoint.x){
                                     focus.w += focus.x - mousePoint.x;
                                 }else{
                                     focus.w -= mousePoint.x - focus.x;
                                 }
-                                focus.x = mousePoint.x;
+                                if (focus.w > 5){
+                                    focus.x = mousePoint.x;
+                                }
                             }
-                            if (mousePoint.y > focus.y+focus.h-10){
+                            if (mouseY > storeY + storeH - 10 && mouseY < storeY + storeH){
                                 if (mouseY < mousePoint.y){
                                     focus.h +=  mousePoint.y - (focus.y + focus.h);
                                 }else{
                                     focus.h -= (focus.y + focus.h) - mousePoint.y;
                                 }
-                            }else if(mousePoint.y < focus.y+10){
+                            }else if(mouseY < storeY+10 && mouseY > storeY){
                                 if (mouseY > mousePoint.y){
                                     focus.h += focus.y - mousePoint.y;
                                 }else{
                                     focus.h -= mousePoint.y - focus.y;
                                 }
-                                focus.y = mousePoint.y;
+                                if (focus.h > 5){
+                                    focus.y = mousePoint.y;
+                                }
                             }
                         }
                     }
                     if (focus.h <= 0){
-                        focus.h = 1;
+                        focus.h = 5;
                     }
                     if (focus.w <= 0){
-                        focus.w = 1;
+                        focus.w = 5;
                     }
                     repaint();
                 }
@@ -200,6 +218,10 @@ class Frames extends JFrame{
                         }
                         for (Figures fig : figs) {
                             focus = fig;
+                            storeX = focus.x;
+                            storeY = focus.y;
+                            storeH = focus.h;
+                            storeW = focus.w;
                         }
                         repaint();
                     }
