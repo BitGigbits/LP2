@@ -89,7 +89,7 @@ class Frames extends JFrame{
                             if (mouseX > storeX + storeW - 10 && mouseX < storeX + storeW) {
                                 if (mouseX < mousePoint.x) {
                                     focus.w += mousePoint.x - (focus.x + focus.w);
-                                }else {
+                                }else{
                                     focus.w -= (focus.x + focus.w) - mousePoint.x;
                                 }
                             }else if(mouseX < storeX+10 && mouseX > storeX){
@@ -98,9 +98,7 @@ class Frames extends JFrame{
                                 }else{
                                     focus.w -= mousePoint.x - focus.x;
                                 }
-                                if (focus.w > 5){
-                                    focus.x = mousePoint.x;
-                                }
+                                focus.x = mousePoint.x;
                             }
                             if (mouseY > storeY + storeH - 10 && mouseY < storeY + storeH){
                                 if (mouseY < mousePoint.y){
@@ -114,17 +112,9 @@ class Frames extends JFrame{
                                 }else{
                                     focus.h -= mousePoint.y - focus.y;
                                 }
-                                if (focus.h > 5){
-                                    focus.y = mousePoint.y;
-                                }
+                                focus.y = mousePoint.y;
                             }
                         }
-                    }
-                    if (focus.h <= 0){
-                        focus.h = 5;
-                    }
-                    if (focus.w <= 0){
-                        focus.w = 5;
                     }
                     repaint();
                 }

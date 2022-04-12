@@ -16,5 +16,4 @@ public class Ellipse extends Figures {
         g2d.setColor(this.colorBorder);
         g2d.draw(new Ellipse2D.Double(this.x, this.y, this.w, this.h));
     }
-
 }
