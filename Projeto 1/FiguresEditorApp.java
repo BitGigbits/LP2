@@ -92,13 +92,22 @@ class Frames extends JFrame{
                                 }else{
                                     focus.w -= (focus.x + focus.w) - mousePoint.x;
                                 }
+                                if (focus.w <= 1){
+                                    focus.w = 1;
+                                }
                             }else if(mouseX < storeX+10 && mouseX > storeX){
                                 if (mouseX > mousePoint.x){
                                     focus.w += focus.x - mousePoint.x;
                                 }else{
-                                    focus.w -= mousePoint.x - focus.x;
+                                    focus.w = focus.w - (mousePoint.x - focus.x);
                                 }
-                                focus.x = mousePoint.x;
+                                if (focus.w > 0){
+                                    focus.x = mousePoint.x;
+                                }
+                                if (focus.w <= 1){
+                                    focus.w = 1;
+                                    focus.x = (storeW + storeX) + focus.w;
+                                }
                             }
                             if (mouseY > storeY + storeH - 10 && mouseY < storeY + storeH){
                                 if (mouseY < mousePoint.y){
@@ -106,13 +115,22 @@ class Frames extends JFrame{
                                 }else{
                                     focus.h -= (focus.y + focus.h) - mousePoint.y;
                                 }
+                                if (focus.h <= 1){
+                                    focus.h = 1;
+                                }
                             }else if(mouseY < storeY+10 && mouseY > storeY){
                                 if (mouseY > mousePoint.y){
                                     focus.h += focus.y - mousePoint.y;
                                 }else{
                                     focus.h -= mousePoint.y - focus.y;
                                 }
-                                focus.y = mousePoint.y;
+                                if (focus.h > 0){
+                                    focus.y = mousePoint.y;
+                                }
+                                if (focus.h <= 1){
+                                    focus.h = 1;
+                                    focus.y = (storeH + storeY) + focus.h;
+                                }
                             }
                         }
                     }
