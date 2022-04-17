@@ -1,5 +1,4 @@
 import figures.*;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -11,7 +10,7 @@ public class FiguresEditorApp {
         Frames frame = new Frames();
         frame.setVisible(true);
         frame.setTitle("Figures");
-        frame.setSize(500,500);
+        frame.setSize(1000, 800);
         frame.setFocusTraversalKeysEnabled(false);
         frame.createBufferStrategy(2);
     }
@@ -47,7 +46,7 @@ class Frames extends JFrame{
                 mouseX = evt.getX();
                 mouseY = evt.getY();
                 for (Figures fig: figs){
-                    if (mouseX >= fig.x && mouseX <= fig.x+fig.w && mouseY >= fig.y && mouseY <= fig.y+fig.h){
+                    if (fig.clicked(mouseX, mouseY)){
                         focus = fig;
                         if (resizing){
                             move = false;
@@ -191,7 +190,6 @@ class Frames extends JFrame{
                                 }
                             case 'p':
                                 resizing = true;
-                                move = false;
                                 break;
                             case 'o':
                                 resizing = false;
@@ -242,11 +240,10 @@ class Frames extends JFrame{
         for (Figures f: figs){
             f.paint(g);
         }
-        Graphics2D g2d = (Graphics2D)g;
+        Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(Color.orange);
         if (focus != null){
-            g2d.setStroke(new BasicStroke(4));
-            g2d.drawRect(focus.x - 3, focus.y - 3, focus.w + 6, focus.h + 6);
+            focus.Focus_Paint(g2d);
         }
     }
 }

@@ -1,7 +1,9 @@
 package figures;
 import java.awt.*;
 
-public abstract class Figures {
+import visible.IVisible;
+
+public abstract class Figures implements IVisible{
     public int x, y;
     public int w, h;
     public Color colorIntern;
@@ -23,7 +25,5 @@ public abstract class Figures {
         this.h = h;
         this.colorBorder = colorBorder;
     }
-
-    public abstract void paint(Graphics g);
 
 }

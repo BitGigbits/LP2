@@ -17,4 +17,17 @@ public class Line extends Figures{
         g.setColor(this.colorBorder);
         g.drawPolygon(this.v1, this.v2, 2);
     }
+
+    public boolean clicked (int x, int y){
+        if (x >= this.x && x <= this.x+this.w && y >= this.y && y <= this.y+this.h){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void Focus_Paint(Graphics2D g2d){
+        g2d.setStroke(new BasicStroke(3));
+        g2d.drawRect(this.x - 3, this.y - 3, this.w + 6, this.h + 6);
+    }
 }
