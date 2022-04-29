@@ -6,8 +6,8 @@ Rect* rect_new(){
     Rect* R  = malloc(sizeof(Rect));
     R->x = 0;
     R->y = 0;
-    R->w = 0;
-    R->h = 0;
+    R->w = 25;
+    R->h = 15;
 }
 
 void rect_print (Rect* this) {
