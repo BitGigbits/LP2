@@ -171,21 +171,13 @@ class Frames extends JFrame{
                             case 'i':
                                 if (focus != null){
                                     Color color = JColorChooser.showDialog(null, "Escolha a cor", Color.black);
-                                    if (color == null){
-                                        break;
-                                    }else{
-                                        focus.colorIntern = color;
-                                    }
+                                    focus.set_FillColor(color);
                                     break;
                                 }
                             case 'b':
                                 if (focus != null){
                                     Color color = JColorChooser.showDialog(null, "Escolha a cor", Color.black);
-                                    if (color == null){
-                                        break;
-                                    }else{
-                                        focus.colorBorder = color;
-                                    }
+                                    focus.set_BorderColor(color);
                                     break;
                                 }
                             case 'p':
