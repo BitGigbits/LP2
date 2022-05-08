@@ -8,7 +8,7 @@ public abstract class Figures implements IVisible{
     protected Color colorIntern;
     protected Color colorBorder;
 
-    public Figures(int x, int y, int w, int h, Color colorIntern, Color colorBorder){
+    protected Figures(int x, int y, int w, int h, Color colorIntern, Color colorBorder){
         this.x = x;
         this.y = y;
         this.w = w;

@@ -4,6 +4,7 @@ import java.awt.*;
 public class Line extends Figures{
     private int v1[] = new int[2];
     private int v2[] = new int[2];
+    
 
     public Line(int x, int y, int w, int h, Color colorBorder){
         super(x, y, w, h, colorBorder);
@@ -26,7 +27,7 @@ public class Line extends Figures{
         }
     }
 
-    public void Focus_Paint(Graphics2D g2d){
+    public void Focus_Paint(Graphics2D g2d, boolean focused){
         g2d.setStroke(new BasicStroke(3));
         g2d.drawRect(this.x - 3, this.y - 3, this.w + 6, this.h + 6);
     }

@@ -1,4 +1,6 @@
 import figures.*;
+import figures.Button;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -8,22 +10,31 @@ public class FiguresEditorApp {
 
     public static void main(String[] args){
         Frames frame = new Frames();
+        
         frame.setVisible(true);
         frame.setTitle("Figures");
-        frame.setSize(1000, 800);
+        frame.setSize(750, 700);
         frame.setFocusTraversalKeysEnabled(false);
-        frame.createBufferStrategy(2);
+        frame.createBufferStrategy(3);
     }
 }
 
 class Frames extends JFrame{
     private final ArrayList<Figures> figs = new ArrayList<>();
-    private int dx, dy, mouseY, mouseX, storeX, storeY, storeH, storeW;
+    private final ArrayList<Button> buts = new ArrayList<>();
     private Figures focus = null;
+    private Button focus_but = null;
+
+    private int dx, dy, mouseY, mouseX, storeX, storeY, storeH, storeW;
     private boolean move = false;
     private boolean resizing = false;
 
     Frames(){
+
+        buts.add(new Button(new Rect(40, 50, 50, 50, Color.white, Color.black), 0));
+        buts.add(new Button(new Ellipse(40, 110, 50, 50, Color.white, Color.black), 1));
+        buts.add(new Button(new Triangle(40, 170, 50, 50, Color.white, Color.black), 2));
+        buts.add(new Button(new Line(40, 230, 50, 50, Color.black), 3));
 
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing (WindowEvent e){
@@ -45,6 +56,14 @@ class Frames extends JFrame{
                 focus = null;
                 mouseX = evt.getX();
                 mouseY = evt.getY();
+                for (Button but: buts){
+                    if (but.clicked(mouseX, mouseX)){
+                        focus_but = but;
+                        focus_but.focused = true;
+                    }else{
+                        but.focused = false;
+                    }
+                }
                 for (Figures fig: figs){
                     if (fig.clicked(mouseX, mouseY)){
                         focus = fig;
@@ -61,6 +80,7 @@ class Frames extends JFrame{
                         dy = mouseY - focus.y;
                     }
                 }
+                System.out.format("Coordenadas: (%d, %d)\n",mouseX, mouseY);
                 if (focus != null){
                     Figures aux = focus;
                     figs.remove(focus);
@@ -229,13 +249,16 @@ class Frames extends JFrame{
 
     public void paint(Graphics g){
         super.paint(g);
+        Graphics2D g2d = (Graphics2D) g;
+        for (Button but: this.buts){
+            but.paint(g);
+        }
         for (Figures f: figs){
             f.paint(g);
         }
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.orange);
         if (focus != null){
-            focus.Focus_Paint(g2d);
+            g2d.setColor(Color.orange);
+            focus.Focus_Paint(g2d, false);
         }
     }
 }

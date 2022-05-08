@@ -31,7 +31,7 @@ public class Triangle extends Figures {
         }
     }
 
-    public void Focus_Paint(Graphics2D g2d){
+    public void Focus_Paint(Graphics2D g2d, boolean focused){
         int sup1[] = new int[3];
         int sup2[] = new int[3];
         sup1[0] = v1[0] + 3;

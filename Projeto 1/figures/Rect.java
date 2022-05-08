@@ -22,7 +22,7 @@ public class Rect extends Figures{
         }
     }
 
-    public void Focus_Paint(Graphics2D g2d){
+    public void Focus_Paint(Graphics2D g2d, boolean focused){
         g2d.setStroke(new BasicStroke(3));
         g2d.drawRect(this.x - 3, this.y - 3, this.w + 6, this.h + 6);
     }
