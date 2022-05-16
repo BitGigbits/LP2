@@ -93,6 +93,7 @@ class Panels extends JPanel{
                 focus = null;
                 mouseX = evt.getX();
                 mouseY = evt.getY();
+                boolean figura = false;
 
                 if (focus_but != null && focus_but.focused){
                     if (focus_but.id == 1){
@@ -104,17 +105,8 @@ class Panels extends JPanel{
                     }else if(focus_but.id == 4){
                         figs.add(new Lines(mouseX-25, mouseY-25, 50, 50, Color.black, null));
                     }
+                    focus_but.focused = false;
                     focus_but = null;
-                }
-
-                //Verificando se clicou em um botão.
-                for (Button but: buts){
-                    if (but.clicked(mouseX, mouseY) == 1){
-                        focus_but = but;
-                        focus_but.focused = true;
-                    }else{
-                        but.focused = false;
-                    }
                 }
 
                 //Verificando se clicou em uma figura.
@@ -133,6 +125,19 @@ class Panels extends JPanel{
                         resizing = true;
                         break;
                     }
+                }
+
+                if (focus == null){
+                    for (Button but: buts){
+                        if (but.clicked(mouseX, mouseY) == 1){
+                            focus_but = but;
+                            focus_but.focused = true;
+                        }else{
+                            but.focused = false;
+                        }
+                    }
+                }else{
+                    focus_but = null;
                 }
                 //Colocando o a figura em froco a frente das outras.
                 if (focus != null){
@@ -183,9 +188,11 @@ class Panels extends JPanel{
                         case 'l':
                             figs.add(new Lines(point.x-25, point.y-25, 50, 50, Color.black, null));
                             break;
-                            case KeyEvent.VK_DELETE:
-                            figs.remove(focus);
-                            focus = null;
+                        case KeyEvent.VK_DELETE:
+                            if (focus != null){
+                                figs.remove(focus);
+                                focus = null;
+                            }
                             break;
                         case KeyEvent.VK_TAB:
                             focus = figs.get(0);
