@@ -7,7 +7,7 @@
 
 - Você pode arrastar todas elas com o clique do mouse, como também consegue mover as figuras com as setinhas do teclado.
 
-**Sobre o Redimensionamento:** No momento está sendo atualizado essa função e em breve estará funcionando.
+- Redimensione as figuras clicando no pequeno quadrado no canto superior esquerdo ou no canto inferior direito. No triângulo temos apenas o direito.
 
 - Para adicionar cores as figuras, clique em alguma delas e aperte a tecla 'b' para mudar a cor de contorno ou a tecla 'i' para mudar a cor de preenchimento das figuras.
 
@@ -15,4 +15,10 @@
 
 - Você consegue trocar o foco das figuras com a tecla TAB.
 
-- O programa automaticamente salva quando você fecha a janela. Só abrir novamente para continuar da onde parou.
+- O programa automaticamente salva quando você fecha a janela em um arquivo chamado proj.bin. Só abrir novamente para continuar da onde parou.
+
+# As outras funcionalidades
+
+- Botão de lixeira: Clique nele e depois em uma figura e a figura será deletada.
+- Botão de dados: Clique nele e depois em algum canto da tela para criar uma figura aleatória com cores aleatórias.
+- Botão de brush: Clique nele e depois em uma figura, irá aparecer uma janela, siga as instruções na tela para trocar a cor da figura selecionada.
