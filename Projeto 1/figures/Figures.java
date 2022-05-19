@@ -2,10 +2,13 @@ package figures;
 import java.awt.*;
 import java.io.Serializable;
 import visible.IVisible;
+import java.awt.geom.Rectangle2D;
+import java.awt.event.*;
 
 public abstract class Figures implements IVisible, Serializable{
     protected int x, y;
     protected int w, h;
+    protected Rectangle2D rs1, rs2;
     protected Color colorFill;
     protected Color colorBorder;
     protected Color Neutral = new Color(0, 0, 0, 150);
@@ -59,8 +62,6 @@ public abstract class Figures implements IVisible, Serializable{
         }
     }
 
-    public abstract void resize(int MouseX, int MouseY, int MouseX2, int MouseY2, int storeX, int storeY, int storeW, int storeH, int pos);
-
     public void set_FillColor(Color c){
         if (c != null){
             this.colorFill = c;
@@ -73,4 +74,5 @@ public abstract class Figures implements IVisible, Serializable{
         }
     }
 
+    public abstract void resize(MouseEvent e, int pos);
 }
