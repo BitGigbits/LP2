@@ -3,9 +3,8 @@ import visible.IVisible;
 import figures.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.*;
-import javax.swing.*;
 
-public class Button extends JFrame implements IVisible {
+public class Button implements IVisible {
 
     private int x, y, w, h;
     private Rectangle2D but;
@@ -23,13 +22,12 @@ public class Button extends JFrame implements IVisible {
         this.h = h;
         this.w = w;
         this.but = new Rectangle2D.Double(x, y, h, w);
-        this.focused = focused;
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g, boolean focused){
         Graphics2D g2d = (Graphics2D) g.create();
 
-        if (this.focused){
+        if (focused){
             g2d.setColor(Color.gray);
         }else{
             g2d.setColor(Color.white);
@@ -39,19 +37,15 @@ public class Button extends JFrame implements IVisible {
         g2d.setStroke(new BasicStroke(3));
         g2d.draw(but);
         if (fig != null){
-            this.fig.paint(g);
+            this.fig.paint(g, false);
         }
     }
 
-    public int clicked (int x, int y){
+    public boolean clicked (int x, int y){
         if (but.contains(x, y)){
-            return 1;
+            return true;
         }else{
-            return 0;
+            return false;
         }
-    }
-
-    public void Focus_Paint(Graphics g){
-        return;
     }
 }

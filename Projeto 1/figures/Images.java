@@ -24,21 +24,18 @@ public class Images extends Figures{
         }
     }
 
-    public void paint(Graphics g) {
+    public void paint(Graphics g, boolean focused) {
         g.drawImage(img, this.x, this.y, this.w, this.h, null);
     }
 
     //Não utilizados abaixo.
-    public void Focus_Paint(Graphics g) {
-        return;
+
+    public boolean clicked(int x, int y) {
+        return false;
     }
 
-    public void resize(MouseEvent e, int pos) {
+    public void drag(MouseEvent e, int dx, int dy) {
         return;
-    }
-
-    public int clicked(int x, int y) {
-        return 0;
     }
     
 }

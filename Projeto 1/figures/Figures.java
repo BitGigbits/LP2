@@ -2,13 +2,11 @@ package figures;
 import java.awt.*;
 import java.io.Serializable;
 import visible.IVisible;
-import java.awt.geom.Rectangle2D;
 import java.awt.event.*;
 
 public abstract class Figures implements IVisible, Serializable{
     protected int x, y;
     protected int w, h;
-    protected Rectangle2D rs1, rs2;
     protected Color colorFill;
     protected Color colorBorder;
     protected Color Neutral = new Color(0, 0, 0, 150);
@@ -74,5 +72,13 @@ public abstract class Figures implements IVisible, Serializable{
         }
     }
 
-    public abstract void resize(MouseEvent e, int pos);
+    public void ResizeFocus_Paint(Graphics g){
+        Graphics2D g2d = (Graphics2D) g.create();
+
+        g2d.setStroke(new BasicStroke(3));
+        g2d.setColor(Color.red);
+        g2d.drawRect(this.x-8, this.y-8, this.w+16, this.h+16);
+    }
+
+    public abstract void drag(MouseEvent e, int dx, int dy);
 }
