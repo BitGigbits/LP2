@@ -22,3 +22,7 @@
 - Botão de lixeira: Clique nele e depois nas figuras que você deseja deletar.
 - Botão de dados: Clique nele e depois em algum canto da tela para criar uma figura aleatória com cores aleatórias.
 - Botão de brush: Clique nele e depois em uma figura, irá aparecer uma janela, siga as instruções na tela para trocar a cor da figura selecionada.
+
+# Imagens
+Todas as imagens foram retiradas do seguinte website:
+https://www.flaticon.com
