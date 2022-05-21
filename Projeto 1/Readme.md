@@ -13,7 +13,7 @@
 
 - Você consegue trocar o foco das figuras com a tecla TAB.
 
-- O programa automaticamente salva quando você fecha a janela em um arquivo chamado proj.bin. Só abrir novamente para continuar da onde parou.
+- O programa automaticamente salva quando você fecha a janela em um arquivo binário. Só abrir novamente para continuar da onde parou.
 
 - É possível movimentar uma figura em foco com as setinhas do teclado.
 
