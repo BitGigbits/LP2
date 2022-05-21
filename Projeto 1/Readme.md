@@ -15,7 +15,7 @@
 
 - O programa automaticamente salva quando você fecha a janela em um arquivo chamado proj.bin. Só abrir novamente para continuar da onde parou.
 
-# Os botões de baixo
+# Os botões do menu debaixo
 
 - Botão de Cursor: Selecione esse botão para mover as figuras livremente pela tela.
 - Botão de Redimensionar: Ao selecionar essa ferramenta, clique em uma figura para fazê-la ficar em foco. Ao fazer isso, todas as figuras ficarão com um quadrado vermelho que indica aonde você deve clicar para redimensioná-las. Somente a figura que você clicou e fe ficar em foco consegue ser redimensionada.
